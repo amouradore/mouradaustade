@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask, jsonify
 from flask_cors import CORS
 import requests
@@ -6,7 +5,12 @@ from datetime import datetime
 import pytz
 
 app = Flask(__name__)
-CORS(app)  # Permet les requêtes cross-origin
+CORS(app)
+
+# Route de test
+@app.route('/')
+def home():
+    return jsonify({"status": "ok", "message": "API is running"})
 
 @app.route('/api/matches/<date>')
 def get_matches(date):
@@ -62,4 +66,4 @@ def get_matches(date):
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=10000)
